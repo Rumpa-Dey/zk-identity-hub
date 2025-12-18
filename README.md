@@ -1,20 +1,40 @@
-# 🧾 Age Verification zkApp (Mina Protocol)
+# 🧾 Age Verification zkApp (Mina Devnet)
 
-A privacy-preserving **Zero-Knowledge Age Verification** zkApp built using the **Mina Protocol** and **o1js**.  
-This zkApp allows a user to **prove their age is above a required threshold (e.g., 18)** **without revealing their actual age**.  
-This is the initial prototype intended for future enhancement and Mina Grant submissions.
+A privacy-preserving **zero-knowledge smart contract** built using **o1js** that verifies whether a user’s age is above a required threshold (e.g., 18) **without revealing the actual age**.
+
+This zkApp is deployed and tested on **Mina Devnet**.
 
 ---
 
 ## 🚀 Features
 
-- ✔ Zero-Knowledge verification of age  
-- ✔ Actual age is never revealed  
-- ✔ Written using **o1js**  
-- ✔ Fully local execution example  
-- ✔ Simple client script demonstrating proof generation + verification  
+- Zero-Knowledge age verification
+- Private input: `age`
+- Public rule: `age ≥ minAge`
+- Stores last verified age on-chain (as a Field)
 
----
+
+## 🧠 How It Works (High-Level)
+
+1. The zkApp exposes a method `verifyAge(age, minAge)`
+
+2. A zero-knowledge proof ensures:
+
+        age ≥ minAge
+3. If valid, zkApp stores the verified age on-chain
+
+    The verifier checks the proof, without seeing the actual age.
+
+4. Anyone can read the stored value from the blockchain
+
+    This showcases how Mina zkApps can be used for privacy-preserving identity checks.
+
+## 🔑 Key Roles
+
+| Key        | Purpose                         |
+|------------|----------------------------------|
+| Fee Payer  | Pays transaction fees (MINA)     |
+| zkApp Key  | Owns and authorizes the zkApp    |
 
 ## 🗂 Project Structure
 
@@ -23,9 +43,12 @@ project-root/
 
 ├── src/
 
-│ ├── AgeVerifier.ts # zkApp smart contract
+│ ├── AgeVerifierDevnet.ts # zkApp smart contract
 
-│ ├── client.ts # Script to generate and verify the ZK proof
+├── scripts/
+│ ├── deployDevnet.ts
+│ ├── callVerifyAgeDevnet.ts
+│ └── readStateDevnet.ts
 
 │
 
@@ -35,7 +58,19 @@ project-root/
 
 └── README.md
 
+
+
 ---
+
+## 🌐 Network Configuration
+
+- **Network:** Mina Devnet
+- **GraphQL Endpoint:**
+
+```txt
+https://api.minascan.io/node/devnet/v1/graphql
+```
+
 
 ## 📦 Installation
 
@@ -44,55 +79,56 @@ Requires **Node.js 18.14.0 or higher**.
 ```bash
 npm install
 ```
-## ▶️ Usage
+
 
 ### 🔧 Build the project
 
 ```bash
 npm run build
 ```
-## ▶️ Run the age verification script
-
-If your package.json includes:
+## 🚀 Deploy zkApp to Devnet
 
 ```bash
-"dev": "ts-node src/client.ts"
+node build/scripts/deployDevnet.js
 ```
-Then run:
+
+After deployment, note:
+
+zkApp address
+
+Transaction hash (from explorer)
+
+##  Call vertifyAge
+
 ```bash
-npm run dev
+node build/scripts/callVerrifyAgeDevnet.js
 ```
-Otherwise:
+This
+
+- Generates a zk proof
+
+- Calls verifyAge(age, minAge)
+
+- Updates on-chain state
+
+## 📖 Read on-chain State
+
+
 ```bash
-npx ts-node src/client.ts
+node build/scripts/readStateDevnet.js
 ```
+This reads:
 
-This will:
+zkApp balance
 
-Compile the smart contract
+lastVerified age
+## 🔍 View on Explorer
+```bash
+https://minascan.io/devnet/account/<ZKAPP_ADDRESS>
 
-Generate a Zero-Knowledge proof
-
-Verify whether a sample age meets the threshold
-
-## 🧠 How It Works (High-Level)
-
-The user inputs their age privately (not shared or stored).
-
-The zkApp checks the condition:
-
-age >= requiredAge
-
-
-A zkSNARK is generated proving the condition is true.
-
-The verifier checks the proof, without seeing the actual age.
-
-This showcases how Mina zkApps can be used for privacy-preserving identity checks.
-
+```
 ## 🛠 Tech Stack
-
-Mina Protocol
+Mina Protocol (Devnet)
 
 o1js
 
@@ -100,24 +136,17 @@ TypeScript
 
 Node.js
 
-## 🌱 Future Enhancements
+## 🎯Learning Outcomes
 
-Store verification results on-chain
+zkApp lifecycle (compile → deploy → call → read)
 
-Add UI + wallet integration
+Fee payer vs zkApp key separation
 
-Build reusable ZK identity components
+Devnet transactions
 
-Deploy on Berkeley Testnet / Mainnet
+On-chain state management
 
-Add more attributes (DOB, KYC fields) with selective disclosure
-
-These upgrades will be part of the next milestones and grant submissions.
-
-## 🤝 Contributing
-
-Feedback and contributions are welcome!
-
+Zero-knowledge constraints
 ## 📜 License
 
 Apache 2.0 License
