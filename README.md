@@ -46,8 +46,11 @@ project-root/
 │ ├── AgeVerifierDevnet.ts # zkApp smart contract
 
 ├── scripts/
+
 │ ├── deployDevnet.ts
+
 │ ├── callVerifyAgeDevnet.ts
+
 │ └── readStateDevnet.ts
 
 │
@@ -70,7 +73,11 @@ project-root/
 ```txt
 https://api.minascan.io/node/devnet/v1/graphql
 ```
+## 🔍 View on Explorer
+```bash
+https://minascan.io/devnet/account/<ZKAPP_ADDRESS>
 
+```
 
 ## 📦 Installation
 
@@ -101,7 +108,7 @@ Transaction hash (from explorer)
 ##  Call vertifyAge
 
 ```bash
-node build/scripts/callVerrifyAgeDevnet.js
+node build/scripts/callVerifyAgeDevnet.js
 ```
 This
 
@@ -122,11 +129,7 @@ This reads:
 zkApp balance
 
 lastVerified age
-## 🔍 View on Explorer
-```bash
-https://minascan.io/devnet/account/<ZKAPP_ADDRESS>
 
-```
 ## 🛠 Tech Stack
 Mina Protocol (Devnet)
 
