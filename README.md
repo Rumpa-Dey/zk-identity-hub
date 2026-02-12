@@ -83,8 +83,8 @@ zk-identity-hub/
 │
 ├── src/                # zkApp smart contract
 ├── scripts/            # deployment scripts
-├── backend/     # backend (OTP / verification logic)
-├── frontend/    # UI
+├── backend/            # backend (OTP / verification logic)
+├── frontend/           # UI
 ├── package.json
 ├── tsconfig.json
 └── README.md
