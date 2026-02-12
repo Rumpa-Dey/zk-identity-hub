@@ -1,155 +1,213 @@
-# 🧾 Age Verification zkApp (Mina Devnet)
+# Mina zkApp – ZK Identity Hub
 
-A privacy-preserving **zero-knowledge smart contract** built using **o1js** that verifies whether a user’s age is above a required threshold (e.g., 18) **without revealing the actual age**.
+A Zero-Knowledge-based Identity Verification Hub built on **Mina Protocol** that enables privacy-preserving verification of:
 
-This zkApp is deployed and tested on **Mina Devnet**.
+- ✅ Age  
+- ✅ Phone Number  
+- ✅ Email Address  
+
+This project demonstrates how Zero-Knowledge Proofs (ZKPs) can verify user attributes **without revealing sensitive personal data on-chain**.
 
 ---
 
-## 🚀 Features
+## 🚀 Vision
 
-- Zero-Knowledge age verification
-- Private input: `age`
-- Public rule: `age ≥ minAge`
-- Stores last verified age on-chain (as a Field)
+Traditional identity systems store and expose personal information.
+
+This zkApp shows how we can:
+
+- Verify identity attributes using ZK proofs
+- Store only verification status on-chain
+- Preserve user privacy
+- Enable compliant Web3 onboarding
+
+The long-term goal is to build a **Decentralized ZK Identity Infrastructure on Mina**.
+
+---
+
+## 🧠 Why Mina Protocol?
+
+Mina enables:
+
+- Lightweight zkApps
+- Constant-size blockchain
+- Efficient proof verification
+- Recursive proof composition
+
+This makes Mina ideal for scalable privacy-preserving identity systems.
+
+---
+
+## 🏗️ Architecture
+
+Frontend (Wallet Connected UI)  
+⬇  
+Zero-Knowledge Proof Generation  
+⬇  
+Mina zkApp Smart Contract  
+⬇  
+On-chain Verification State Update  
+
+---
 
 
-## 🧠 How It Works (High-Level)
 
-1. The zkApp exposes a method `verifyAge(age, minAge)`
+## 🔐 Core Features
 
-2. A zero-knowledge proof ensures:
+- Age verification via zkApp proof
+- Phone verification (OTP simulation)
+- Email verification (OTP simulation)
+- On-chain verification flags
+- Privacy-preserving identity state
 
-        age ≥ minAge
-3. If valid, zkApp stores the verified age on-chain
+---
 
-    The verifier checks the proof, without seeing the actual age.
+## 📸 UI Preview
+<img src="Frontend.PNG" width="700"/>
 
-4. Anyone can read the stored value from the blockchain
+## 🛠️ Tech Stack
 
-    This showcases how Mina zkApps can be used for privacy-preserving identity checks.
+- Mina Protocol (Devnet)
+- o1js 
+- TypeScript
+- HTML / JavaScript
+- Auro Wallet
+- Zero-Knowledge Proofs
 
-## 🔑 Key Roles
+---
 
-| Key        | Purpose                         |
-|------------|----------------------------------|
-| Fee Payer  | Pays transaction fees (MINA)     |
-| zkApp Key  | Owns and authorizes the zkApp    |
+## 📂 Project Structure
 
-## 🗂 Project Structure
-
-project-root/
+```
+zk-identity-hub/
 │
-
-├── src/
-
-│ ├── AgeVerifierDevnet.ts # zkApp smart contract
-
-├── scripts/
-
-│ ├── deployDevnet.ts
-
-│ ├── callVerifyAgeDevnet.ts
-
-│ └── readStateDevnet.ts
-
-│
-
+├── src/                # zkApp smart contract
+├── scripts/            # deployment scripts
+├── backend/     # backend (OTP / verification logic)
+├── frontend/    # UI
 ├── package.json
-
 ├── tsconfig.json
-
 └── README.md
-
-
+```
 
 ---
 
-## 🌐 Network Configuration
+## ⚙️ Setup Instructions
 
-- **Network:** Mina Devnet
-- **GraphQL Endpoint:**
-
-```txt
-https://api.minascan.io/node/devnet/v1/graphql
-```
-## 🔍 View on Explorer
-```bash
-https://minascan.io/devnet/account/<ZKAPP_ADDRESS>
-
-```
-
-## 📦 Installation
-
-Requires **Node.js 18.14.0 or higher**.
+### 1️⃣ Install Dependencies
 
 ```bash
 npm install
 ```
 
-
-### 🔧 Build the project
+### 2️⃣ Build zkApp
 
 ```bash
 npm run build
 ```
-## 🚀 Deploy zkApp to Devnet
+
+### 3️⃣ Deploy to Mina Devnet
 
 ```bash
-node build/scripts/deployDevnet.js
+npm run deploy
 ```
 
-After deployment, note:
+### 4️⃣ Run Frontend
 
-zkApp address
-
-Transaction hash (from explorer)
-
-##  Call vertifyAge
+Navigate to the frontend directory:
 
 ```bash
-node build/scripts/callVerifyAgeDevnet.js
+cd frontend
+npm install
+npm start
 ```
-This
+Connect Auro Wallet and interact with the deployed zkApps.
 
-- Generates a zk proof
+---
 
-- Calls verifyAge(age, minAge)
+## 🌐 Deployment Details
 
-- Updates on-chain state
+Network: Mina Devnet  
 
-## 📖 Read on-chain State
+### Deployed Contracts:
+- AgeVerifierDevnet: B62qor9EwMMyfEG7zciYCahgxjQ4NQ96aETEXZHzWZYw1vu4dEetabk
+- PhoneVerifierDevnet: B62qoTCuspbMGa2uP3ZL6P8rHLsPdiwDaV4UaUMsvuSRABBr5HtRWyS
+- EmailVerifierDevnet: B62qpZLZyLXXzz9gBtCuoHAw23G8ELHMKnd9HkWpGGPNCFLjBhJXn9G
+
+### Example Deployment Transaction:
+https://minascan.io/devnet/tx/5JuKwrjD6L2QDk3hBU2hvMZqfRYhiMjPnJHMHn1hMtKDQ4vFKX4q
 
 
-```bash
-node build/scripts/readStateDevnet.js
-```
-This reads:
+## 🔎 Smart Contract Modules
 
-zkApp balance
+This project contains three zkApp smart contracts:
 
-lastVerified age
+### 1️⃣ AgeVerifierDevnet.ts
+Verifies age condition and updates on-chain state.
 
-## 🛠 Tech Stack
-Mina Protocol (Devnet)
+### 2️⃣ PhoneVerifierDevnet.ts
+Handles phone verification logic.
 
-o1js
+### 3️⃣ EmailVerifierDevnet.ts
+Handles email verification logic.
 
-TypeScript
+Each module maintains its own verification state on Mina Devnet.
 
-Node.js
 
-## 🎯Learning Outcomes
+---
 
-zkApp lifecycle (compile → deploy → call → read)
+## 🔐 Privacy Model
 
-Fee payer vs zkApp key separation
+- No raw personal data is stored on-chain
+- Only verification states are recorded
+- Verification logic executed via Zero-Knowledge proofs
+- Designed for selective disclosure and privacy preservation
 
-Devnet transactions
 
-On-chain state management
+---
 
-Zero-knowledge constraints
+## 🌍 Potential Use Cases
+
+- University digital identity
+- zk-KYC infrastructure
+- Age-restricted dApps
+- Web3 login systems
+- Privacy-preserving compliance systems
+
+---
+
+## 🧩 Modular zkApp Design
+
+Instead of combining all logic into one contract,
+this project demonstrates a modular architecture
+where each identity attribute is verified via an independent zkApp.
+
+This enables:
+
+- Scalability
+- Upgradability
+- Separation of concerns
+- Independent proof verification
+
+---
+
+## 🔮 Future Improvements
+
+- Production-grade ZK circuits
+- Secure off-chain verification integration
+- Mainnet deployment
+
+---
+
+## 👨‍💻 Authors
+
+Dr. Shouvik Dey  
+Dr. Rumpa Dey  
+
+Blockchain | Zero-Knowledge | Privacy Systems
+
+---
+
 ## 📜 License
 
-Apache 2.0 License
+MIT License
