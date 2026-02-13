@@ -129,7 +129,7 @@ Connect Auro Wallet and interact with the deployed zkApps.
 
 Network: Mina Devnet  
 
-### Deployed Contracts:
+### Deployed Contract Addresses:
 - AgeVerifierDevnet: B62qor9EwMMyfEG7zciYCahgxjQ4NQ96aETEXZHzWZYw1vu4dEetabk
 - PhoneVerifierDevnet: B62qoTCuspbMGa2uP3ZL6P8rHLsPdiwDaV4UaUMsvuSRABBr5HtRWyS
 - EmailVerifierDevnet: B62qpZLZyLXXzz9gBtCuoHAw23G8ELHMKnd9HkWpGGPNCFLjBhJXn9G
@@ -143,13 +143,13 @@ https://minascan.io/devnet/tx/5JuKwrjD6L2QDk3hBU2hvMZqfRYhiMjPnJHMHn1hMtKDQ4vFKX
 This project contains three zkApp smart contracts:
 
 ### 1️⃣ AgeVerifierDevnet.ts
-Verifies age condition and updates on-chain state.
+Verifies age condition and updates on-chain state
 
 ### 2️⃣ PhoneVerifierDevnet.ts
-Handles phone verification logic.
+Handles phone verification logic
 
 ### 3️⃣ EmailVerifierDevnet.ts
-Handles email verification logic.
+Handles email verification logic
 
 Each module maintains its own verification state on Mina Devnet.
 
