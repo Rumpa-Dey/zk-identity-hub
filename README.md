@@ -42,7 +42,9 @@ This makes Mina ideal for scalable privacy-preserving identity systems.
 
 Frontend (Wallet Connected UI)  
 ⬇  
-Zero-Knowledge Proof Generation  
+Backend (Express + OTP + Fee Payer)  
+⬇  
+Zero-Knowledge Proof Generation (o1js)  
 ⬇  
 Mina zkApp Smart Contract  
 ⬇  
@@ -52,11 +54,25 @@ On-chain Verification State Update
 
 
 
+## 🔐 Flow Diagram
+<img src="FlowDiagram.PNG" width="300"/>
+
+ 
+## 🔄 Verification Flow Summary
+
+1. User connects wallet (identity binding)
+2. Backend validates attribute (Age / Phone / Email)
+3. OTP used for Phone and Email verification
+4. Backend generates Zero-Knowledge proof
+5. zkApp updates verification state on Mina Devnet
+6. No sensitive data stored on-chain
+
+
 ## 🔐 Core Features
 
 - Age verification via zkApp proof
-- Phone verification (OTP simulation)
-- Email verification (OTP simulation)
+- Phone verification (backend OTP validation)
+- Email verification (backend OTP validation)
 - On-chain verification flags
 - Privacy-preserving identity state
 
